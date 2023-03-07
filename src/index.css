@@ -1,0 +1,97 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*===============*/
+/* GENERAL RULES */
+/*===============*/
+:root {
+  --yellowish:            #ffce00;
+  --dark:                 #242424;
+  --dark1 :               #0d1117;
+  --dark2 :               #10141a;
+  --red:                  #f83038;
+  --orange:               #ff6740;
+  --blue:				          #64acff;
+  --magicColors:          linear-gradient(90deg, #0175ff, #8042e2 69%, #0565d8);
+  --magicColorsInverted:  linear-gradient(90deg, #8042e2, #0175ff 69%, #8042e2);
+  --purpleGradient:       linear-gradient(-70deg, #9867f0, #ed4e50);
+  --blueGradient:       	linear-gradient(-70deg, #a2facf, #64acff);
+  --redGradient:		    	linear-gradient(#f00, #f0f);
+  --hmm: 					        linear-gradient(to bottom right, #121826, var(--dark));
+}
+
+html {
+  background-color: var(--dark);
+  color: #fff;
+  /* font-family: 'Lato', 'Arial', sans-serif; */
+  font-size: 20px;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+}
+body{ overflow-x: hidden; }
+.row {
+  max-width: 1140px;
+  padding: 40px 0;
+  margin: 0 auto;
+}
+h2 {
+  color: #fff;
+  font-size: 180%;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+h2:after {
+  display: block;
+  height: 2px;
+  background-color: var(--yellowish);
+  content: " ";
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.hr { 
+width: 1140px;
+margin: 0 auto;
+}
+h3 {
+text-transform: capitalize;
+}
+section { padding-top: 40px; }
+/*=================*/
+/*=================*/
+/*=================*/
+
+.flex { display: flex; }
+.flexC {
+  justify-content: center;
+  align-items: center;
+}
+.flexRow { flex-direction: row; }
+.flexCol { flex-direction: column; }
+.alignC { align-items: center; }
+.justifySB { justify-content: space-between; }
+.overHide { overflow: hidden; }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

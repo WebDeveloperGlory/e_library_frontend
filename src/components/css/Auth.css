@@ -1,0 +1,104 @@
+.auth {
+    min-height: calc(100vh - 56px);
+    /* background: #fee648; */
+    padding: 40px;
+}
+.auth .container {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    background: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.auth .container .user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.auth .container .user .imgBx,
+.auth .container .user .formBx {
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+.auth .container .user .imgBx { transition: 0.5s; }
+.auth .container .user .formBx {
+    background-color: #fff;
+    padding: 40px;
+    transition: 0.5s;
+}
+.auth .container .user .formBx form h2 {
+    font-size: 110%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #555;
+}
+.auth .container .user .formBx form input,
+.auth .container .user .formBx form input[type="submit"] {
+    font-size: 90%;
+    letter-spacing: 1px;
+}
+.auth .container .user .formBx form input {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    background-color: #f5f5f5;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 8px 0;
+    font-weight: 300;
+}
+.auth .container .user .formBx form input[type="submit"] {
+    max-width: 100px;
+    background-color: #677eff;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.5s;
+}
+.auth .container .user .formBx form .signUp {
+    position: relative;
+    margin-top: 20px;
+    font-size: 67%;
+    letter-spacing: 1px;
+    color: #555;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+.auth .container .user .formBx form .signUp a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #677eff;
+}
+.auth .container.active .signInBx .imgBx,
+.auth .container.active .signUpBx .formBx { 
+    left: 100%;
+    animation: slideIn 0.5s 0s linear 1 forwards;
+}
+.auth .container.active .signInBx .formBx,
+.auth .container.active .signUpBx .imgBx {
+    left: -100%;
+    animation: slideIn 0.5s 0s linear 1 forwards;
+}
+
+@media (max-width: 991px)
+{
+    .auth .container {
+        max-width: 400px;
+    }
+    .auth .container .user .imgBx {
+        display: none;
+    }
+    .auth .container .user .formBx {
+        width: 100%;
+    }
+}

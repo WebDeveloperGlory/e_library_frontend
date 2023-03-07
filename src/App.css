@@ -1,0 +1,182 @@
+.nav {
+    position: relative;
+    padding: 5px 60px;
+    padding-top: 5px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px);
+}
+.userCard {
+    position: absolute;
+    /* top: 70px; */
+    /* transform: translateY(70px); */
+    justify-content: center;
+    align-self: flex-end;
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 320px;
+    height: 480px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+    animation: slideDown 0.5s linear forwards;
+}
+.userCard .lines {
+    position: absolute;
+    inset: 0;
+    background-color: #292929;
+    overflow: hidden;
+}
+.userCard .lines::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 120px;
+    background: linear-gradient(transparent, #64acff, #64acff, #64acff,transparent);
+    animation: animate 4s linear infinite;
+}
+.userCard .lines::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: #292929;
+}
+
+.userCard .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.userCard .content .head {
+    height: 20%;
+    width: inherit;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    font-size: 130%;
+}
+.userCard .content .head h3,
+.userCard .content .head button {
+    font-size: inherit;
+}
+.userCard .content .head button {
+    background: none;
+    color: #f83038;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+.userCard .content .topSection { 
+    height: 20%;
+    align-items: center;
+}
+.userCard .content .topSection:after { top: 185px; }
+.userCard .content .topSection:after,
+.userCard .content .middleSection::after {
+    position: absolute;
+    left: 20px;
+    display: block;
+    height: 2px;
+    background-color: var(--yellowish);
+    content: " ";
+    width: 280px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.userCard .content .topSection .picBlock {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    margin: 10px;
+    background-color: #64acff;
+}
+.userCard .content .topSection .textBlock {
+    width: 68%;
+    height: 100%;
+    justify-content: center;
+    padding: 10px;
+}
+.userCard .content .topSection .textBlock h4,
+.userCard .content .topSection .textBlock p 
+{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0;
+    line-height: 18px;
+}
+.userCard .content .topSection .textBlock h3 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    font-size: 130%;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
+}
+.userCard .content .topSection .textBlock h4 {
+    font-size: 90%;
+    font-weight: 300;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+.userCard .content .topSection .textBlock p {
+    font-size: 80%;
+    font-weight: 500;font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.userCard .content .middleSection {
+    justify-content: center;
+    margin-top: 20px;
+    height: 36%;
+    padding: 5px 20px;
+}
+.userCard .content .middleSection::after { top: 370px; }
+.userCard .content .middleSection .iconDiv {
+    background-color: #ffce00;
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.userCard .content .middleSection a {
+    text-decoration: none;
+    color: #fff;
+}
+.userCard .content .middleSection a:hover {
+    text-decoration: 1px underline #ffce00;
+}
+.userCard .content .middleSection .top,
+.userCard .content .middleSection .mid,
+.userCard .content .middleSection .last 
+{
+    padding: 10px;
+    border-bottom: 1px solid #fff;
+}
+.userCard .content .middleSection .last  { border-bottom: none; }
+.userCard .content .middleSection .top h4,
+.userCard .content .middleSection .mid h4,
+.userCard .content .middleSection .last h4
+{
+    line-height: 20px;
+}
+.userCard .content .middleSection .top p,
+.userCard .content .middleSection .mid p,
+.userCard .content .middleSection .last p 
+{
+    line-height: 15px;
+    font-size: 70%;
+}
+.userCard .content .bottomSection { height: 20%; }
+.userCard .content .bottomSection button {
+    width: 85%;
+    height: 50px;
+    cursor: pointer;
+    background-color: #64acff;
+    border: none;
+    border-radius: 15px;
+    font-size: 100%;
+    transition: 0.5s;
+}
+.userCard .content .bottomSection button:hover {
+    background-color: var(--orange);
+    color: #fff;
+}

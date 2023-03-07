@@ -1,0 +1,32 @@
+@keyframes jiggle {
+    48%, 62% {
+        transform: scale(1.0, 1.0);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    56% {
+        transform: scale(0.9, 1.1) translate(0, -5px);
+    }
+    59% {
+        transform: scale(1.0, 1.0) translate(0, -3px);
+    }
+}
+@keyframes slideIn {
+    100% {
+        left: 0;
+    }
+}
+@keyframes animate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+@keyframes slideDown {
+    100% {
+        transform: translateY(70px);
+    }
+}
