@@ -6,19 +6,19 @@ import { styles } from '../styles'
 import './css/Auth.css'
 import './css/Animations.css'
 
-const Auth = ({ r, setIsLoggedIn }) => {
+const Auth = ({ r, setIsLoggedIn, url, offline }) => {
   return (
     <div>
         <section className={`auth ${styles.flexC} mt-12 md:mt-0`}>
             <div className="container active">
-                {r === "sign" ? <SignUp /> : <Login setIsLoggedIn={setIsLoggedIn}/>}
+                {r === "sign" ? <SignUp url={url} offline={offline} /> : <Login setIsLoggedIn={setIsLoggedIn} url={url} offline={offline} />}
             </div>
         </section>
     </div>
   )
 }
 
-function Login({ setIsLoggedIn }) {
+function Login({ setIsLoggedIn, url, offline }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -28,7 +28,7 @@ function Login({ setIsLoggedIn }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        axios.post('http://localhost:8081/api/auth/login', {
+        axios.post(`${url}/api/auth/login`, {
             username: username,
             password: password
         })
@@ -63,7 +63,7 @@ function Login({ setIsLoggedIn }) {
         </div>
     )
 }
-function SignUp() {
+function SignUp({ url, offline }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -74,7 +74,7 @@ function SignUp() {
         e.preventDefault();
 
         if(password === confirmPassword && password.length > 7) {
-            axios.post('http://localhost:8081/api/auth/signup', {
+            axios.post(`${url}/api/auth/signup`, {
                 username: username,
                 password: password
             })

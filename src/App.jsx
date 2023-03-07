@@ -152,8 +152,8 @@ function App() {
                 </> 
               :
                 <>
-                  <Route path='/signup' element={<Auth r={"sign"}/>} />
-                  <Route path='/login' element={<Auth r={"log"} setIsLoggedIn={setIsLoggedIn}/>} />
+                  <Route path='/signup' element={<Auth r={"sign"} url={url} offline={offline} />} />
+                  <Route path='/login' element={<Auth r={"log"} setIsLoggedIn={setIsLoggedIn} url={url} offline={offline} />} />
                 </>
             }
             <Route path='/contact_us' element={<Contact request={"false"} user={userData.email} activeMenu={activeMenu} displayedForm={displayedForm} setDisplayedForm={setDisplayedForm}/>} />
