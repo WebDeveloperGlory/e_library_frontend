@@ -12,6 +12,7 @@ import './App.css'
 const Test = () => (<div>Testing, testing</div>)
 
 function App() {
+  const [isLoading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
   const [userData, setUserData] = useState({});
   const [updateUser, setUpdateUser] = useState(0);
@@ -23,6 +24,8 @@ function App() {
   const [displayedForm, setDisplayedForm] = useState("contact");
 
   const navigate = useNavigate();
+  const url = "https://e-library-server-webdeveloperglory.onrender.com";
+  const offline = "http://localhost:8081";
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -57,24 +60,29 @@ function App() {
   }, []);
 
   useEffect(() => {
-    axios({
-      method: "GET",
-      withCredentials: true,
-      url: 'http://localhost:8081/api/books'
-    })
-      .then((res) => {
-          var books = res.data.books;
-          // console.log(books);
-          setBooks(books);
+    const dataFetch = async () => {
+      await axios({
+        method: "GET",
+        withCredentials: true,
+        url: `${url}/api/books`
       })
-      .catch(handleErrors);
+        .then((res) => {
+            var books = res.data.books;
+            // console.log(books);
+            setBooks(books);
+            setLoading(false);
+        })
+        .catch(handleErrors);
+      }
+
+      dataFetch();
   }, [])
 
   function logout() {
     axios({
       method: "POST",
       withCredentials: true,
-      url: 'http://localhost:8081/api/auth/logout'
+      url: `${url}/api/auth/logout`
     }).then((res) => {
       localStorage.removeItem('user');
       setIsLoggedIn(false);
@@ -95,65 +103,67 @@ function App() {
         console.log('Error', err.message)
     }
   }
-
   let rand;
   books.length > 0 ? rand = books[Math.floor(Math.random() * books.length)]._id : null;
 
-  return (
-    <div>
-      {
-        activeMenu ? (
-          <div className='w-72 fixed sidebar dark:bg-secondary-dark-bg z-10 bg-white' style={{transition: '0.5s'}}>
-            <Sidebar 
-              activeMenu={activeMenu} setActiveMenu={setActiveMenu}
-              screenSize={screenSize} random={rand}
+  if(isLoading) {
+    return <Test />
+  } else {
+    return (
+      <div>
+        {
+          activeMenu ? (
+            <div className='w-72 fixed sidebar dark:bg-secondary-dark-bg z-10 bg-white' style={{transition: '0.5s'}}>
+              <Sidebar 
+                activeMenu={activeMenu} setActiveMenu={setActiveMenu}
+                screenSize={screenSize} random={rand}
+              />
+            </div>
+          ) : (
+            null
+          )
+        }
+        <div className={`dark:bg-main-bg bg-main-bg ${activeMenu ? 'md:ml-72 sm:ml-72' : 'flex-2'}`}>
+          <div className={`fixed md:static bg-inherit dark:bg-main-dark-bg navbar w-full z-10`}>
+            <Navbar 
+              username={userData.username} 
+              isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
+              showUserCard={showUserCard} setShowUserCard={setShowUserCard}
+              setActiveMenu={setActiveMenu} activeMenu={activeMenu}
+              logout={logout} screenSize={screenSize}
+              activeSearch={activeSearch} setActiveSearch={setActiveSearch}
+              books={books}
             />
           </div>
-        ) : (
-          null
-        )
-      }
-      <div className={`dark:bg-main-bg bg-main-bg ${activeMenu ? 'md:ml-72 sm:ml-72' : 'flex-2'}`}>
-        <div className={`fixed md:static bg-inherit dark:bg-main-dark-bg navbar w-full z-10`}>
-          <Navbar 
-            username={userData.username} 
-            isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
-            showUserCard={showUserCard} setShowUserCard={setShowUserCard}
-            setActiveMenu={setActiveMenu} activeMenu={activeMenu}
-            logout={logout} screenSize={screenSize}
-            activeSearch={activeSearch} setActiveSearch={setActiveSearch}
-            books={books}
-          />
+        </div>
+        <header className={`${styles.flex} flexCol`}>
+          {showUserCard ? <UserCard userData={userData} setShowUserCard={setShowUserCard} logout={logout}/> : null}
+        </header>
+
+        <div>
+          <Routes>
+            <Route path='/' element={<Homepage books={books} activeMenu={activeMenu}/>} />
+            <Route path='/test' element={<Test />} />
+            {
+              isLoggedIn ? 
+                <>
+                  <Route path='/request' element={<Contact request={"true"} user={userData.email} activeMenu={activeMenu} displayedForm={displayedForm} setDisplayedForm={setDisplayedForm}/>} />
+                  <Route path='/user' element={<Profile user={userData} activeMenu={activeMenu} updateUser={setUpdateUser} />} />
+                </> 
+              :
+                <>
+                  <Route path='/signup' element={<Auth r={"sign"}/>} />
+                  <Route path='/login' element={<Auth r={"log"} setIsLoggedIn={setIsLoggedIn}/>} />
+                </>
+            }
+            <Route path='/contact_us' element={<Contact request={"false"} user={userData.email} activeMenu={activeMenu} displayedForm={displayedForm} setDisplayedForm={setDisplayedForm}/>} />
+            <Route path='/:id' element={<Book activeMenu={activeMenu} user={userData} url={url} offline={offline} />} />
+          </Routes>
         </div>
       </div>
-      <header className={`${styles.flex} flexCol`}>
-        {showUserCard ? <UserCard userData={userData} setShowUserCard={setShowUserCard} logout={logout}/> : null}
-      </header>
-
-      <div>
-        <Routes>
-          <Route path='/' element={<Homepage books={books} activeMenu={activeMenu}/>} />
-          <Route path='/test' element={<Test />} />
-          {
-            isLoggedIn ? 
-              <>
-                <Route path='/request' element={<Contact request={"true"} user={userData.email} activeMenu={activeMenu} displayedForm={displayedForm} setDisplayedForm={setDisplayedForm}/>} />
-                <Route path='/user' element={<Profile user={userData} activeMenu={activeMenu} updateUser={setUpdateUser} />} />
-              </> 
-            :
-              <>
-                <Route path='/signup' element={<Auth r={"sign"}/>} />
-                <Route path='/login' element={<Auth r={"log"} setIsLoggedIn={setIsLoggedIn}/>} />
-              </>
-          }
-          <Route path='/contact_us' element={<Contact request={"false"} user={userData.email} activeMenu={activeMenu} displayedForm={displayedForm} setDisplayedForm={setDisplayedForm}/>} />
-          <Route path='/:id' element={<Book activeMenu={activeMenu} user={userData} />} />
-        </Routes>
-      </div>
-    </div>
-  )
+    )
+  }
 }
-
 const UserCard = ({ userData, setShowUserCard, logout }) => {
   return (
     <div className={`userCard md:top-0 z-10 fixed`}>

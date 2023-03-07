@@ -4,7 +4,7 @@ import { comment, favorite, bookmark } from '../assets'
 import axios from 'axios'
 import './css/Contact.css'
 
-function Book({ activeMenu, user }) {
+function Book({ activeMenu, user, url, offline }) {
     const [book, setBook] = useState({});
     const [commentText, setCommentText] = useState("");
     const [display, setDisplay] = useState("sympnosis")
@@ -29,7 +29,7 @@ function Book({ activeMenu, user }) {
       axios({
         method: "GET",
         withCredentials: true,
-        url: `http://localhost:8081/api/books${location.pathname}`
+        url: `${url}/api/books${location.pathname}`
       })
       .then((res) => {
         var book = res.data;
@@ -49,7 +49,7 @@ function Book({ activeMenu, user }) {
     }
     function handleSubmit(e) {
       e.preventDefault();
-      axios.post(`http://localhost:8081/api/books${location.pathname}/comments` , {
+      axios.post(`${url}/api/books${location.pathname}/comments` , {
                 authur: user._id,
                 name: user.username,
                 text: commentText
