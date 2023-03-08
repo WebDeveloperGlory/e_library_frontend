@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  // "proxy": "http://localhost:8081",
   "proxy": "https://e-library-server-webdeveloperglory.onrender.com",
   "scripts": {
     "dev": "vite",
